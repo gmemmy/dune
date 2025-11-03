@@ -3,27 +3,31 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "macos": "react-native run-macos",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "bun test",
+    "type-check": "tsc --noEmit",
+    "biome:check": "biome check --apply-unsafe .",
+    "biome:format": "biome format --write ."
   },
   "dependencies": {
+    "@legendapp/list": "^2.0.14",
     "react": "19.0.0",
-    "react-native": "0.79.7"
+    "react-native": "0.79.6",
+    "react-native-macos": "^0.79.0",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/runtime": "^7.25.0",
+    "@biomejs/biome": "^2.3.3",
     "@react-native-community/cli": "18.0.0",
-    "@react-native-community/cli-platform-android": "18.0.0",
-    "@react-native-community/cli-platform-ios": "18.0.0",
-    "@react-native/babel-preset": "0.79.7",
-    "@react-native/eslint-config": "0.79.7",
-    "@react-native/metro-config": "0.79.7",
-    "@react-native/typescript-config": "0.79.7",
+    "@react-native/babel-preset": "0.79.6",
+    "@react-native/eslint-config": "0.79.6",
+    "@react-native/metro-config": "0.79.6",
+    "@react-native/typescript-config": "0.79.6",
     "@types/jest": "^29.5.13",
     "@types/react": "^19.0.0",
     "@types/react-test-renderer": "^19.0.0",
