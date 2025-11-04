@@ -7,18 +7,23 @@ target 'dune-macOS' do
   platform :macos, '11.0'
   use_native_modules!
 
-  # Flags change depending on the env values.
-  flags = get_default_flags()
-
   use_react_native!(
     :path => '../node_modules/react-native-macos',
-    :hermes_enabled => false,
-    :fabric_enabled => ENV['RCT_NEW_ARCH_ENABLED'] == '1',
+    :hermes_enabled => true,
+    :fabric_enabled => true,
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
   post_install do |installer|
     react_native_post_install(installer)
+    # Ensure Pods use the same deployment target and C++ standard
+    installer.pods_project.targets.each do |t|
+      t.build_configurations.each do |c|
+        c.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '11.0'
+        c.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++20'
+        c.build_settings['CLANG_CXX_LIBRARY'] = 'libc++'
+      end
+    end
   end
 end
