@@ -1,18 +1,20 @@
-import type {Entry, FilePort, ListPage} from '@app/ports/files';
 import {FilePortMock} from '@app/adapters/file-port-mock';
+import type {Entry, FilePort, ListPage} from '@app/ports/files';
 
 declare global {
   // eslint-disable-next-line no-var
-  var __FileCoreHostObject: {
-    listAsJSArray: (
-      dir: string,
-      limit: number,
-      cursor?: string,
-    ) => {items: Entry[]; cursor?: string};
-    statMultipleAsJS: (
-      paths: string[],
-    ) => Array<{path: string; size: number; lastModified: number}>;
-  } | undefined;
+  var __FileCoreHostObject:
+    | {
+        listAsJSArray: (
+          dir: string,
+          limit: number,
+          cursor?: string,
+        ) => {items: Entry[]; cursor?: string};
+        statMultipleAsJS: (
+          paths: string[],
+        ) => Array<{path: string; size: number; lastModified: number}>;
+      }
+    | undefined;
 }
 
 function getHost() {
@@ -20,7 +22,10 @@ function getHost() {
 }
 
 export const FilePortNative: FilePort = {
-  async list(dir, {limit = 300, cursor}: {limit?: number; cursor?: string} = {}): Promise<ListPage> {
+  async list(
+    dir,
+    {limit = 300, cursor}: {limit?: number; cursor?: string} = {},
+  ): Promise<ListPage> {
     const host = getHost();
     if (!host) {
       console.warn('[FilePortNative] host not available, using mock');
@@ -37,10 +42,14 @@ export const FilePortNative: FilePort = {
     }
   },
 
-  async statMultiple(paths: string[]): Promise<Array<{path: string; size: number; lastModified: number}>> {
+  async statMultiple(
+    paths: string[],
+  ): Promise<Array<{path: string; size: number; lastModified: number}>> {
     const host = getHost();
     if (!host) {
-      console.warn('[FilePortNative] host not available, statMultiple using mock');
+      console.warn(
+        '[FilePortNative] host not available, statMultiple using mock',
+      );
       return FilePortMock.statMultiple(paths);
     }
     try {
@@ -51,5 +60,3 @@ export const FilePortNative: FilePort = {
     }
   },
 };
-
-

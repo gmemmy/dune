@@ -1,2 +1,7 @@
 # CocoaPods
 Pods/
+compile_commands.json
+generate-compile-commands.sh
+
+# Cache
+.cache/

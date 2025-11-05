@@ -1,7 +1,7 @@
-import {create} from 'zustand';
-import type {Entry, FilePort} from '@app/ports/files';
 import {FilePortMock} from '@app/adapters/file-port-mock';
 import {FilePortNative} from '@app/adapters/file-port-native';
+import type {Entry, FilePort} from '@app/ports/files';
+import {create} from 'zustand';
 
 type State = {
   cwd: string;
@@ -32,30 +32,44 @@ function getHomeFromPath(path: string): string | undefined {
 
 function normalizePath(currentDir: string, input: string): string {
   const trimmed = input.trim();
-  if (trimmed.length === 0) {return currentDir;}
+  if (trimmed.length === 0) {
+    return currentDir;
+  }
   const home = getHomeFromPath(currentDir) ?? '/Users';
-  const expandTilde = (p: string) => (p.startsWith('~') ? home + p.slice(1) : p);
+  const expandTilde = (p: string) =>
+    p.startsWith('~') ? home + p.slice(1) : p;
   let target = expandTilde(trimmed);
   if (!target.startsWith('/')) {
     // Relative
     target = `${currentDir.replace(/\/$/, '')}/${target}`;
   }
-  // Convenience: map top-level common folders to user's home
-  if (target === '/Desktop') {target = `${home}/Desktop`;}
-  if (target === '/Documents') {target = `${home}/Documents`;}
-  if (target === '/Downloads') {target = `${home}/Downloads`;}
+  if (target === '/Desktop') {
+    target = `${home}/Desktop`;
+  }
+  if (target === '/Documents') {
+    target = `${home}/Documents`;
+  }
+  if (target === '/Downloads') {
+    target = `${home}/Downloads`;
+  }
   // Collapse duplicate slashes
   target = target.replace(/\/+/g, '/');
   return target;
 }
 
 export const useExplorer = create<State>((set, get) => ({
-  cwd: (global as unknown as {__FileCoreHostObject: boolean})?.__FileCoreHostObject ? '/Users/sensei' : '/mock',
+  cwd: (global as unknown as {__FileCoreHostObject: boolean})
+    ?.__FileCoreHostObject
+    ? '/Users/sensei'
+    : '/mock',
   items: [],
   cursor: undefined,
   loading: false,
   selectedIndex: 0,
-  port: (global as unknown as {__FileCoreHostObject: boolean})?.__FileCoreHostObject ? FilePortNative : FilePortMock,
+  port: (global as unknown as {__FileCoreHostObject: boolean})
+    ?.__FileCoreHostObject
+    ? FilePortNative
+    : FilePortMock,
   actions: {
     async init() {
       // If native host becomes available after boot, switch port once

@@ -1,4 +1,4 @@
-import {spacing, radii, typeScale} from './tokens';
+import {radii, spacing, typeScale} from './tokens';
 export const theme = {
   spacing,
   radii,

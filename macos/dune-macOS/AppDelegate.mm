@@ -1,9 +1,8 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
-#import <React/RCTBridge.h>
 #import <ReactAppDependencyProvider/RCTAppDependencyProvider.h>
-#import <Foundation/Foundation.h>
+#import <React/RCTBridge.h>
 
 @implementation AppDelegate
 
@@ -14,14 +13,16 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
   self.dependencyProvider = [RCTAppDependencyProvider new];
+
   // Force-load FileCore installer class so the linker doesn't strip it
   (void)NSClassFromString(@"RCTFileCoreInstaller");
-  
+
   // Register for bridge notifications to install JSI module
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(onJavaScriptDidLoad:)
                                                name:RCTJavaScriptDidLoadNotification
                                              object:nil];
+  
   return [super applicationDidFinishLaunching:notification];
 }
 
@@ -31,22 +32,33 @@
   if (bridge == nil) {
     return;
   }
-
+  
+  // Get the FileCoreInstaller module and call install method
   id<RCTBridgeModule> fileCoreInstaller = [bridge moduleForName:@"FileCoreInstaller"];
-  if (fileCoreInstaller != nil && [fileCoreInstaller respondsToSelector:@selector(install)]) {
+  if (fileCoreInstaller != nil) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    // Set the bridge before installation if supported
     if ([fileCoreInstaller respondsToSelector:@selector(setBridge:)]) {
       [fileCoreInstaller performSelector:@selector(setBridge:) withObject:bridge];
     }
-    RCTLogInfo(@"AppDelegate: Invoking FileCoreInstaller.install");
-    [fileCoreInstaller performSelector:@selector(install)];
+    // Safe to ignore warning: install method doesn't return retained objects
+    if ([fileCoreInstaller respondsToSelector:@selector(install)]) {
+      [fileCoreInstaller performSelector:@selector(install)];
+    }
 #pragma clang diagnostic pop
-  } else {
-    RCTLogWarn(@"AppDelegate: FileCoreInstaller module not found or install selector missing");
   }
-
+  
+  // Clean up notification observer after first use
   [[NSNotificationCenter defaultCenter] removeObserver:self name:RCTJavaScriptDidLoadNotification object:nil];
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+#if !__has_feature(objc_arc)
+  [super dealloc];
+#endif
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

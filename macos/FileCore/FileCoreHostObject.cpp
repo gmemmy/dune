@@ -1,5 +1,5 @@
 #include "FileCoreHostObject.h"
-#include "jsi/jsi.h"
+#include <jsi/jsi.h>
 #include <cstddef>
 #include <exception>
 #include <filesystem>

@@ -1,4 +1,4 @@
-import type {FilePort, Entry, ListPage} from '@app/ports/files';
+import type {Entry, FilePort, ListPage} from '@app/ports/files';
 const MOCK: Entry[] = Array.from({length: 6000}, (_, i) => ({
   name: i % 7 === 0 ? `Folder_${i}` : `File_${i}.txt`,
   path: `/mock/${i % 7 === 0 ? `Folder_${i}` : `File_${i}.txt`}`,

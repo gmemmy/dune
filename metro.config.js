@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('node:path');
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
 /**
@@ -10,7 +10,7 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 const defaultConfig = getDefaultConfig(__dirname);
 defaultConfig.resolver = defaultConfig.resolver || {};
 defaultConfig.resolver.platforms = Array.from(
-  new Set([...(defaultConfig.resolver.platforms || []), 'macos'])
+  new Set([...(defaultConfig.resolver.platforms || []), 'macos']),
 );
 
 const config = {

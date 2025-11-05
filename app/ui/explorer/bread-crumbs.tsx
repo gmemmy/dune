@@ -1,6 +1,6 @@
-import * as React from 'react';
-import {View, Text} from 'react-native';
 import {useTheme} from '@app/providers/theme-provider';
+import * as React from 'react';
+import {Text, View} from 'react-native';
 
 export function Breadcrumbs({path}: {path: string}) {
   const {colors} = useTheme();

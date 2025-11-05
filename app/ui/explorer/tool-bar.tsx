@@ -1,12 +1,12 @@
-import {View, Text} from 'react-native';
-import {Input} from '@app/ui/primitives/input';
 import {useTheme} from '@app/providers/theme-provider';
+import {Input} from '@app/ui/primitives/input';
+import {Text, View} from 'react-native';
 
 type Props = {
   cwd: string;
   count: number;
   onEnterPath: (v: string) => void;
-}
+};
 
 export function Toolbar({cwd, count, onEnterPath}: Props) {
   const {colors} = useTheme();

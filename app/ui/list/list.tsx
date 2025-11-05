@@ -1,6 +1,6 @@
-import * as React from 'react';
 import {LegendList} from '@legendapp/list';
-import {ViewStyle, StyleProp} from 'react-native';
+import type * as React from 'react';
+import type {StyleProp, ViewStyle} from 'react-native';
 
 type Props<T> = {
   data: T[];

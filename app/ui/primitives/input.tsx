@@ -1,6 +1,6 @@
-import * as React from 'react';
-import {TextInput, TextInputProps} from 'react-native';
 import {useTheme} from '@app/providers/theme-provider';
+import type * as React from 'react';
+import {TextInput, type TextInputProps} from 'react-native';
 
 export function Input(props: React.PropsWithChildren<TextInputProps>) {
   const {colors} = useTheme();

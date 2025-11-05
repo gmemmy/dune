@@ -1,11 +1,17 @@
-import * as React from 'react';
 import {useExplorer} from '@app/state/explorer';
+import * as React from 'react';
 
-const ExplorerCtx = React.createContext({useSelector: useExplorer});
+const ExplorerCtx = React.createContext({useSelector: useExplorer, actions: useExplorer.getState().actions});
 
 export function ExplorerProvider({children}: React.PropsWithChildren) {
+  const actions = React.useMemo(() => useExplorer.getState().actions, []);
+
+  React.useEffect(() => {
+    actions.init();
+  }, [actions]);
+
   return (
-    <ExplorerCtx.Provider value={{useSelector: useExplorer}}>
+    <ExplorerCtx.Provider value={{useSelector: useExplorer, actions}}>
       {children}
     </ExplorerCtx.Provider>
   );

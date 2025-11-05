@@ -2,7 +2,9 @@ require_relative '../node_modules/react-native-macos/scripts/react_native_pods'
 
 prepare_react_native_project!
 
-target 'dunefresh-macOS' do
+project 'dune.xcodeproj'
+
+target 'dune-macOS' do
   platform :macos, '11.0'
   use_native_modules!
 

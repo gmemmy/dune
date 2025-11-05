@@ -1,5 +1,6 @@
-import React, {createContext, useContext} from 'react';
 import {usePalette} from '@app/theme/theme';
+import type React from 'react';
+import {createContext, useContext} from 'react';
 type Ctx = {colors: ReturnType<typeof usePalette>};
 const ThemeCtx = createContext<Ctx>({
   colors: {} as ReturnType<typeof usePalette>,

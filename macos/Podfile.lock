@@ -1887,13 +1887,13 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   boost: 7d49a506d1ac47358fea28558d184dd6431170ca
   DoubleConversion: 10f51d3e1238973c033faac2d84c0ea114942f53
-  fast_float: 44983b3bddb2d2ed3021a98be86f60ec8abc9ffd
+  fast_float: c2434b4e88042610bf25ac71841aae7a22faaf27
   FBLazyVector: 71133f116ceb23bd2d81af6df1a7ae5496c9f322
   FileCore: b7f803ec9ae5d49c9c51672ba0a91cc614055592
-  fmt: f6af2d677a106e3e44c9536a4c0c7f03ab53c854
-  glog: ea1690290b2b90f923ffcce07436498f09b428ee
-  hermes-engine: 44bb6fe76a6eb400d3a992e2d0b21946ae999fa9
-  RCT-Folly: e8b53d8c0d2d9df4a6a8b0a368a1a91fc62a88cb
+  fmt: a4b8f4bba8d072292be4113d1ecdcf807f447b62
+  glog: 9e0cec976c67e84abf1bd3ee860aa71f949dcbd5
+  hermes-engine: b314fcb65443d03fd994ac8651076c11d5831259
+  RCT-Folly: 8e6b615ed3596271026f80a4e0e30e691adab50d
   RCTDeprecation: c147f8912f768e5eedbc5f115b2b223d007d9fe3
   RCTRequired: ae1e2d916a79190663b82b4cc5cddb1466bd788b
   RCTTypeSafety: 626e96e45d1d27898d2835401ec4f685ee342f4d
@@ -1955,9 +1955,9 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 1d1d794177511cbb0249dd4e5083389eb2bb1d7b
   ReactCodegen: 0aefb9705d8519da77d2276eebd13a49f82e1eeb
   ReactCommon: debd7f6b3b2872b251efebf93935e5fad0fb01b5
-  SocketRocket: 03f7111df1a343b162bf5b06ead333be808e1e0a
+  SocketRocket: a868ad08da313a5e54a3fe39593181e3829d9cc0
   Yoga: 45ce05cb11db042ba2e5e51a2dfaf0ff63d269f9
 
-PODFILE CHECKSUM: 96efb57a57f2a6a60b4cd1f29d19e62a05d196b3
+PODFILE CHECKSUM: f32b2cb2a7b97e0e58ef725fa3048d729f6d454f
 
 COCOAPODS: 1.16.2

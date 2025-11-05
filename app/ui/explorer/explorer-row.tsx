@@ -1,7 +1,7 @@
+import type {Entry} from '@app/ports/files';
+import {useTheme} from '@app/providers/theme-provider';
 import React from 'react';
 import {Text, View} from 'react-native';
-import {useTheme} from '@app/providers/theme-provider';
-import type {Entry} from '@app/ports/files';
 export function ExplorerRow({
   item,
   selected,
@@ -25,7 +25,9 @@ export function ExplorerRow({
         {item.name}
       </Text>
       {item.size != null && (
-        <Text style={{width: 100, textAlign: 'right', color: colors.muted}}>{item.size}</Text>
+        <Text style={{width: 100, textAlign: 'right', color: colors.muted}}>
+          {item.size}
+        </Text>
       )}
     </View>
   );
