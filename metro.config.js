@@ -1,3 +1,4 @@
+const path = require('path');
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
 
 /**
@@ -6,6 +7,18 @@ const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {};
+const defaultConfig = getDefaultConfig(__dirname);
+defaultConfig.resolver = defaultConfig.resolver || {};
+defaultConfig.resolver.platforms = Array.from(
+  new Set([...(defaultConfig.resolver.platforms || []), 'macos'])
+);
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+const config = {
+  resolver: {
+    extraNodeModules: {
+      '@app': path.resolve(__dirname, 'app'),
+    },
+  },
+};
+
+module.exports = mergeConfig(defaultConfig, config);
